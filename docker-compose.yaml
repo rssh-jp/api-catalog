@@ -1,13 +1,13 @@
 version: "3"
 
 services:
-    httpd:
-        container_name: httpd
-        image: httpd:alpine3.16
-        ports:
-          - "8080:80"
-        volumes:
-          - ./ui/app/out/:/usr/local/apache2/htdocs/
+    #httpd:
+    #    container_name: httpd
+    #    image: httpd:alpine3.16
+    #    ports:
+    #      - "8080:80"
+    #    volumes:
+    #      - ./ui/app/out/:/usr/local/apache2/htdocs/
     api:
         container_name: api
         build:
@@ -18,3 +18,23 @@ services:
           - "18080:8080"
         volumes:
           - ./api/:/go/src/app/
+    ui:
+        container_name: ui
+        build:
+            context: .
+            dockerfile: ./resources/docker/local/ui/Dockerfile
+        tty: true
+        ports:
+          - "3000:3000"
+        volumes:
+          - ./ui/app/:/node/app/
+    storybook:
+        container_name: storybook
+        build:
+            context: .
+            dockerfile: ./resources/docker/local/storybook/Dockerfile
+        tty: true
+        ports:
+          - "6006:6006"
+        volumes:
+          - ./ui/app/:/node/app/
