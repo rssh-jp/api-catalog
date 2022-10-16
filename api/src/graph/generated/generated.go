@@ -3,7 +3,7 @@
 package generated
 
 import (
-	"api/graph/model"
+	"api/src/graph/model"
 	"bytes"
 	"context"
 	"errors"

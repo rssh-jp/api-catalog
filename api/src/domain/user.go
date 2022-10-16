@@ -3,7 +3,7 @@ package domain
 import(
     "context"
 
-    "api/graph/model"
+    "api/src/graph/model"
 )
 
 type UserRepository interface{

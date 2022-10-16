@@ -1,8 +1,6 @@
 package main
 
 import (
-	"api/graph"
-	"api/graph/generated"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +9,9 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
     "github.com/rs/cors"
 
-    userRepo "api/user/repository"
+	"api/src/graph"
+	"api/src/graph/generated"
+    userRepo "api/src/user/repository"
 )
 
 const defaultPort = "8080"
@@ -39,3 +39,4 @@ func main() {
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
+

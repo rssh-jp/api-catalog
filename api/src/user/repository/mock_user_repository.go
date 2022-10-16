@@ -3,8 +3,8 @@ package repository
 import(
     "context"
 
-    "api/domain"
-    "api/graph/model"
+    "api/src/domain"
+    "api/src/graph/model"
 )
 
 type mockUserRepository struct{

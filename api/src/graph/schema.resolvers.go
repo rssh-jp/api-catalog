@@ -4,8 +4,8 @@ package graph
 // will be copied through when generating and any unknown code will be moved to the end.
 
 import (
-	"api/graph/generated"
-	"api/graph/model"
+	"api/src/graph/generated"
+	"api/src/graph/model"
 	"context"
 	"fmt"
 )
