@@ -4,17 +4,16 @@ package graph
 //
 // It serves as dependency injection for your app, add any dependencies you require here.
 
-import(
-    "api/src/domain"
+import (
+	"api/src/domain"
 )
 
-type Resolver struct{
-    userRepository domain.UserRepository
+type Resolver struct {
+	userRepository domain.UserRepository
 }
 
-func NewResolver(userRepository domain.UserRepository)*Resolver{
-    return &Resolver{
-        userRepository: userRepository,
-    }
+func NewResolver(userRepository domain.UserRepository) *Resolver {
+	return &Resolver{
+		userRepository: userRepository,
+	}
 }
-

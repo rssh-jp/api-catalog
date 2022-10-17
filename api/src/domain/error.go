@@ -1,9 +1,9 @@
 package domain
 
-import(
-    "errors"
+import (
+	"errors"
 )
 
-var(
-    ErrNotFound = errors.New("Not found")
+var (
+	ErrNotFound = errors.New("Not found")
 )

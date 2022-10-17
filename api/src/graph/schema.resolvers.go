@@ -30,6 +30,16 @@ func (r *queryResolver) UserByID(ctx context.Context, id string) (*model.User, e
 	return r.userRepository.GetByID(ctx, id)
 }
 
+// Settings is the resolver for the settings field.
+func (r *queryResolver) Settings(ctx context.Context) ([]*model.Setting, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+// SettingDetailByID is the resolver for the settingDetailByID field.
+func (r *queryResolver) SettingDetailByID(ctx context.Context, id int) (*model.SettingDetail, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 // Mutation returns generated.MutationResolver implementation.
 func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 

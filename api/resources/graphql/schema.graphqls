@@ -12,12 +12,22 @@ type Todo {
 type User {
   id: ID!
   name: String!
+  age: Int
+}
+
+type Setting{
+  id: Int!
+  name: String!
+  url: String!
+}
+type SettingDetail{
+  setting: Setting!
+  json: String!
 }
 
 type Query {
-  todos: [Todo!]!
-  users: [User!]!
-  userByID(ID: ID!): User!
+  settings: [Setting!]!
+  settingDetailByID(id: Int!): SettingDetail!
 }
 
 input NewTodo {

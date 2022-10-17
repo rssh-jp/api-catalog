@@ -7,6 +7,17 @@ type NewTodo struct {
 	UserID string `json:"userId"`
 }
 
+type Setting struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
+}
+
+type SettingDetail struct {
+	Setting *Setting `json:"setting"`
+	JSON    string   `json:"json"`
+}
+
 type Todo struct {
 	ID   string `json:"id"`
 	Text string `json:"text"`
@@ -17,4 +28,5 @@ type Todo struct {
 type User struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
+	Age  *int   `json:"age"`
 }

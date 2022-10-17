@@ -9,7 +9,5 @@ ENV CGO_ENABLED=0
 
 WORKDIR /go/src/app
 
-#COPY ./api /go/src/app
-
-CMD go mod tidy && reflex  -s -r '\.go$$' go run server.go
+CMD go mod tidy && reflex  -s -r '\.go$$' go run src/app/http/main.go
 

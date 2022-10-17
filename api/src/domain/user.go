@@ -1,13 +1,12 @@
 package domain
 
-import(
-    "context"
+import (
+	"context"
 
-    "api/src/graph/model"
+	"api/src/graph/model"
 )
 
-type UserRepository interface{
-    Fetch(context.Context)([]*model.User, error)
-    GetByID(context.Context, string)(*model.User, error)
+type UserRepository interface {
+	Fetch(context.Context) ([]*model.User, error)
+	GetByID(context.Context, string) (*model.User, error)
 }
-
