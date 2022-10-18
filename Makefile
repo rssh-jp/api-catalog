@@ -1,3 +1,6 @@
+build:
+	docker-compose -f resources/docker-compose/docker-compose.yaml build
+
 up:
 	docker-compose -f resources/docker-compose/docker-compose.yaml up
 

@@ -7,7 +7,7 @@ services:
     #    ports:
     #      - "18080:80"
     #    volumes:
-    #      - ../../ui/app/out/:/usr/local/apache2/htdocs/
+    #      - ../../frontend/ui/out/:/usr/local/apache2/htdocs/
     api:
         container_name: api
         build:
@@ -17,7 +17,7 @@ services:
         ports:
           - "8080:8080"
         volumes:
-          - ../../api/:/go/src/app/
+          - ../../backend/api/:/go/src/app/
     ui:
         container_name: ui
         build:
@@ -27,7 +27,7 @@ services:
         ports:
           - "3000:3000"
         volumes:
-          - ../../ui/app/:/node/app/
+          - ../../frontend/ui/:/node/app/
     storybook:
         container_name: storybook
         build:
@@ -37,4 +37,4 @@ services:
         ports:
           - "6006:6006"
         volumes:
-          - ../../ui/app/:/node/app/
+          - ../../frontend/ui/:/node/app/
