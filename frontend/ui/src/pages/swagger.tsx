@@ -6,8 +6,8 @@ interface SwaggerProps {}
 
 const Swagger: FC<SwaggerProps> = ({}: SwaggerProps) => {
   const router = useRouter()
-  const url = router.query.url as string
-  return <SwaggerContainer url={url} />
+  const id = parseInt(router.query.id as string, 10)
+  return <SwaggerContainer id={id} />
 }
 
 export default Swagger

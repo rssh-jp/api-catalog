@@ -32,12 +32,12 @@ func (r *queryResolver) UserByID(ctx context.Context, id string) (*model.User, e
 
 // Settings is the resolver for the settings field.
 func (r *queryResolver) Settings(ctx context.Context) ([]*model.Setting, error) {
-	panic(fmt.Errorf("not implemented"))
+	return r.settingUsecase.Fetch(ctx)
 }
 
 // SettingDetailByID is the resolver for the settingDetailByID field.
 func (r *queryResolver) SettingDetailByID(ctx context.Context, id int) (*model.SettingDetail, error) {
-	panic(fmt.Errorf("not implemented"))
+	return r.settingUsecase.GetByID(ctx, id)
 }
 
 // Mutation returns generated.MutationResolver implementation.

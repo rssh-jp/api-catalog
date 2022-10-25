@@ -10,10 +10,12 @@ import (
 
 type Resolver struct {
 	userRepository domain.UserRepository
+	settingUsecase domain.SettingUsecase
 }
 
-func NewResolver(userRepository domain.UserRepository) *Resolver {
+func NewResolver(userRepository domain.UserRepository, su domain.SettingUsecase) *Resolver {
 	return &Resolver{
 		userRepository: userRepository,
+		settingUsecase: su,
 	}
 }

@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactText } from 'react'
+import React, { ReactNode, ReactText, useEffect, useState } from 'react'
 import {
   IconButton,
   Box,
@@ -14,21 +14,15 @@ import {
   BoxProps,
   FlexProps,
 } from '@chakra-ui/react'
-import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu } from 'react-icons/fi'
+import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu, FiTarget } from 'react-icons/fi'
 import { IconType } from 'react-icons'
+import { gql, useQuery } from '@apollo/client'
 
 interface LinkItemProps {
   name: string
   icon: IconType
   path: string
 }
-const LinkItems: Array<LinkItemProps> = [
-  { path: '/', name: 'Home', icon: FiHome },
-  { path: '/login?path="https://github.com/rssh-jp/test-react"', name: 'Trending', icon: FiTrendingUp },
-  { path: '/b', name: 'Explore', icon: FiCompass },
-  { path: '/c', name: 'Favourites', icon: FiStar },
-  { path: '/swagger?url=https://petstore.swagger.io/v2/swagger.json', name: 'Settings', icon: FiSettings },
-]
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -61,7 +55,38 @@ interface SidebarProps extends BoxProps {
   onClose: () => void
 }
 
+const BaseLinkItems: Array<LinkItemProps> = [
+  { path: '/', name: 'Home', icon: FiHome },
+  { path: '/login?path="https://github.com/rssh-jp/test-react"', name: 'Trending', icon: FiTrendingUp },
+  { path: '/b', name: 'Explore', icon: FiCompass },
+  { path: '/c', name: 'Favourites', icon: FiStar },
+  { path: '/swagger?url=https://petstore.swagger.io/v2/swagger.json', name: 'Settings', icon: FiSettings },
+]
+
+const QUERY_SETTINGS = gql`
+  query settings {
+    settings {
+      id
+      name
+      url
+    }
+  }
+`
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const [linkItems, setLinkItems] = useState<Array<LinkItemProps>>([])
+  const { loading, data, error } = useQuery(QUERY_SETTINGS)
+  useEffect(() => {
+    console.log('++++++++++++', data)
+    if (data == null) {
+      return
+    }
+    let list: LinkItemProps[] = BaseLinkItems
+    data.settings.map((item: any) => {
+      console.log('+++', item)
+      list.push({ path: '/swagger?id=' + item.id, name: item.name, icon: FiTarget })
+    })
+    setLinkItems(list)
+  }, [data])
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -78,7 +103,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {linkItems.map((link) => (
         <NavItem key={link.name} icon={link.icon} path={link.path}>
           {link.name}
         </NavItem>

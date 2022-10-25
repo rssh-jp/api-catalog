@@ -1,18 +1,44 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'swagger-ui-react/swagger-ui.css'
+import { gql, useQuery } from '@apollo/client'
 
 const SwaggerUI = dynamic(import('swagger-ui-react'), { ssr: false })
 
+const QUERY_SETTINGS = gql`
+  query settingDetailByID($id: Int!) {
+    settingDetailByID(id: $id) {
+      setting {
+        id
+        name
+        url
+      }
+      json
+    }
+  }
+`
 interface SwaggerContainerProps {
-  url: string
+  id: number
 }
 
-export const SwaggerContainer: FC<SwaggerContainerProps> = ({ url }: SwaggerContainerProps) => {
+export const SwaggerContainer: FC<SwaggerContainerProps> = ({ id }: SwaggerContainerProps) => {
+  const { loading, data, error } = useQuery(QUERY_SETTINGS, {
+    variables: { id: id },
+  })
+
+  const [spec, setSpec] = useState('')
+
+  useEffect(() => {
+    if (data == null) {
+      return
+    }
+    setSpec(data.settingDetailByID.json)
+  }, [data])
+
   return (
     <>
-      {url}
-      <SwaggerUI url={url} />
+      {id}
+      <SwaggerUI spec={spec} />
     </>
   )
 }

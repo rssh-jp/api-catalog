@@ -11,6 +11,7 @@ import (
 
 	"api/src/graph"
 	"api/src/graph/generated"
+	settingUsecase "api/src/setting/usecase"
 	userRepo "api/src/user/repository"
 )
 
@@ -25,7 +26,10 @@ func main() {
 	// repository
 	ur := userRepo.NewMockUserRepository()
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: graph.NewResolver(ur)}))
+	// usecase
+	su := settingUsecase.NewSettingUsecase()
+
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: graph.NewResolver(ur, su)}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 
